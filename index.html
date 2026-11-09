@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Git Kommandon, Push/Pull & Utökade Flödesscheman</title>
+    <title>Git & Flowchart Pro Challenge - Programmering 1</title>
     <style>
         :root {
             --bg-dark: #0f172a;
@@ -15,49 +15,64 @@
             --correct: #22c55e;
             --wrong: #ef4444;
             --border: #334155;
+            --code-bg: #090d16;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
         body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; padding: 20px; display: flex; justify-content: center; min-height: 100vh; }
-        .container { max-width: 800px; width: 100%; margin: auto; }
-        header { text-align: center; margin-bottom: 24px; padding: 20px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border); }
-        h1 { font-size: 1.8rem; color: var(--accent); margin-bottom: 8px; }
+        .container { max-width: 820px; width: 100%; margin: auto; }
+        header { text-align: center; margin-bottom: 24px; padding: 22px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border); }
+        h1 { font-size: 1.8rem; color: var(--accent); margin-bottom: 6px; }
         .subtitle { color: var(--text-muted); font-size: 0.95rem; }
-        .filter-bar { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 15px; }
-        .filter-btn { background: var(--bg-dark); color: var(--text-main); border: 1px solid var(--border); padding: 8px 16px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; transition: 0.2s; }
-        .filter-btn.active, .filter-btn:hover { background: var(--accent); color: #000; font-weight: 600; border-color: var(--accent); }
-        .card { background: var(--card-bg); padding: 28px; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .filter-bar { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+        .filter-btn { background: var(--bg-dark); color: var(--text-main); border: 1px solid var(--border); padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 0.85rem; font-weight: 500; transition: 0.2s; }
+        .filter-btn.active, .filter-btn:hover { background: var(--accent); color: #000; font-weight: 700; border-color: var(--accent); }
+        .card { background: var(--card-bg); padding: 28px; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
         .progress-bar { height: 8px; background: var(--bg-dark); border-radius: 4px; overflow: hidden; margin-bottom: 20px; }
         .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.3s ease; }
-        .meta-info { display: flex; justify-content: space-between; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 12px; font-weight: 600; }
-        .category-badge { background: rgba(56, 189, 248, 0.15); color: var(--accent); padding: 2px 10px; border-radius: 99px; font-size: 0.8rem; }
-        .question-text { font-size: 1.25rem; font-weight: 600; margin-bottom: 20px; }
+        .meta-info { display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 14px; font-weight: 600; }
+        .category-badge { background: rgba(56, 189, 248, 0.15); color: var(--accent); padding: 3px 10px; border-radius: 99px; font-size: 0.8rem; border: 1px solid rgba(56, 189, 248, 0.3); }
+        .question-text { font-size: 1.25rem; font-weight: 600; margin-bottom: 18px; }
+        
+        /* Symbol Container */
+        .symbol-display { background: #0b1120; border: 1px solid var(--border); border-radius: 10px; padding: 24px; display: flex; justify-content: center; align-items: center; margin-bottom: 20px; min-height: 140px; }
+        .symbol-display svg { max-width: 240px; height: 90px; }
+
         .options-list { display: flex; flex-direction: column; gap: 12px; }
-        .option-btn { background: var(--bg-dark); color: var(--text-main); border: 1px solid var(--border); padding: 14px 18px; border-radius: 8px; text-align: left; font-size: 1rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: space-between; }
+        .option-btn { background: var(--bg-dark); color: var(--text-main); border: 1px solid var(--border); padding: 14px 18px; border-radius: 8px; text-align: left; font-size: 0.98rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: space-between; }
         .option-btn:hover:not(:disabled) { border-color: var(--accent); background: rgba(56, 189, 248, 0.05); }
-        .option-btn.correct { background: rgba(34, 197, 94, 0.2); border-color: var(--correct); color: #fff; }
-        .option-btn.wrong { background: rgba(239, 68, 68, 0.2); border-color: var(--wrong); color: #fff; }
+        .option-btn.correct { background: rgba(34, 197, 94, 0.2) !important; border-color: var(--correct) !important; color: #fff !important; font-weight: 600; }
+        .option-btn.wrong { background: rgba(239, 68, 68, 0.2) !important; border-color: var(--wrong) !important; color: #fff !important; }
         .option-btn:disabled { cursor: default; }
-        .feedback-box { margin-top: 20px; padding: 16px; border-radius: 8px; background: rgba(15, 23, 42, 0.7); border-left: 4px solid var(--accent); display: none; }
-        .feedback-title { font-weight: 700; margin-bottom: 4px; }
+
+        /* Skriv själv formulär */
+        .typein-box { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
+        .cmd-input { width: 100%; background: var(--code-bg); border: 1px solid var(--border); color: #38bdf8; font-family: monospace; font-size: 1.1rem; padding: 14px; border-radius: 8px; outline: none; }
+        .cmd-input:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2); }
+        .submit-cmd-btn { background: var(--accent); color: #000; border: none; padding: 12px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 1rem; align-self: flex-start; }
+        .submit-cmd-btn:hover { background: var(--accent-hover); color: #fff; }
+
+        .feedback-box { margin-top: 22px; padding: 16px; border-radius: 8px; background: rgba(15, 23, 42, 0.85); border-left: 4px solid var(--accent); display: none; }
+        .feedback-title { font-weight: 700; font-size: 1.05rem; margin-bottom: 6px; }
+        .feedback-text { font-size: 0.95rem; color: #cbd5e1; }
         .controls { margin-top: 24px; display: flex; justify-content: flex-end; }
-        .next-btn { background: var(--accent); color: #000; border: none; padding: 12px 24px; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; display: none; }
+        .next-btn { background: var(--accent); color: #000; border: none; padding: 12px 26px; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; display: none; }
         .next-btn:hover { background: var(--accent-hover); color: #fff; }
+
         .result-screen { text-align: center; display: none; }
-        .score-circle { font-size: 3rem; font-weight: 800; color: var(--accent); margin: 20px 0; }
+        .score-circle { font-size: 3.2rem; font-weight: 800; color: var(--accent); margin: 20px 0; }
         code { background: #000; padding: 2px 6px; border-radius: 4px; color: #38bdf8; font-family: monospace; }
     </style>
 </head>
 <body>
 <div class="container">
     <header>
-        <h1>Git Kommandon, Push/Pull & Flödesscheman</h1>
-        <p class="subtitle">Träna på alla Git-kommandon och flödesschemasymboler från lektionsmaterialet</p>
+        <h1>Git & Flowchart Pro Challenge</h1>
+        <p class="subtitle">Skriv kommandona själv, tolka flödesschemasymboler och undvik kuggfrågorna!</p>
         <div class="filter-bar">
-            <button class="filter-btn active" onclick="startQuiz('Alla')">Alla (30)</button>
-            <button class="filter-btn" onclick="startQuiz('Git Kommandon')">Git Kommandon</button>
-            <button class="filter-btn" onclick="startQuiz('Branches')">Branches</button>
-            <button class="filter-btn" onclick="startQuiz('Push & Pull')">Push & Pull</button>
-            <button class="filter-btn" onclick="startQuiz('Flowchart')">Flowchart Symboler</button>
+            <button class="filter-btn active" onclick="startQuiz('Alla')">Alla Utmaningar (30)</button>
+            <button class="filter-btn" onclick="startQuiz('Skriv Själv')">Skriv Kommandot Själv</button>
+            <button class="filter-btn" onclick="startQuiz('Symboler')">Symbol-Identifiering</button>
+            <button class="filter-btn" onclick="startQuiz('Git & Push/Pull')">Git Koncept & Push/Pull</button>
         </div>
     </header>
 
@@ -67,393 +82,391 @@
             <span id="question-counter">Fråga 1 av 30</span>
             <span class="category-badge" id="category-badge">Kategori</span>
         </div>
+        
         <div class="question-text" id="question-text">Laddar fråga...</div>
+        
+        <!-- Visuell symbol visas om frågan har en SVG -->
+        <div class="symbol-display" id="symbol-display" style="display: none;"></div>
+
+        <!-- Flervalslista -->
         <div class="options-list" id="options-list"></div>
+
+        <!-- Skriv själv fält -->
+        <div class="typein-box" id="typein-box" style="display: none;">
+            <input type="text" class="cmd-input" id="cmd-input" placeholder="Skriv kommandot här..." autocomplete="off" spellcheck="false">
+            <button class="submit-cmd-btn" id="submit-cmd-btn" onclick="checkTypedAnswer()">Bekräfta svar</button>
+        </div>
+
         <div class="feedback-box" id="feedback-box">
             <div class="feedback-title" id="feedback-title"></div>
-            <div id="feedback-text"></div>
+            <div class="feedback-text" id="feedback-text"></div>
         </div>
+
         <div class="controls">
-            <button class="next-btn" id="next-btn" onclick="nextQuestion()">Nästa fråga →</button>
+            <button class="next-btn" id="next-btn" onclick="nextQuestion()">Nästa utmaning →</button>
         </div>
     </div>
 
     <div class="card result-screen" id="result-screen">
-        <h2>Quiz slutfört!</h2>
+        <h2>Resultat slutfört!</h2>
         <div class="score-circle" id="final-score">0 / 0</div>
         <p id="result-message" style="margin-bottom: 24px; color: var(--text-muted);"></p>
-        <button class="next-btn" style="display:inline-block;" onclick="startQuiz(currentFilter)">Kör igen</button>
+        <button class="next-btn" style="display:inline-block;" onclick="startQuiz(currentFilter)">Försök igen</button>
     </div>
 </div>
 
 <script>
+// SVG Symboler
+const svgSymbols = {
+    terminator: `<svg viewBox="0 0 200 80"><rect x="10" y="15" width="180" height="50" rx="25" fill="#38bdf8" fill-opacity="0.2" stroke="#38bdf8" stroke-width="4"/><text x="100" y="47" fill="#f8fafc" font-size="16" text-anchor="middle" font-weight="bold">START / STOP</text></svg>`,
+    process: `<svg viewBox="0 0 200 80"><rect x="15" y="15" width="170" height="50" fill="#38bdf8" fill-opacity="0.2" stroke="#38bdf8" stroke-width="4"/><text x="100" y="47" fill="#f8fafc" font-size="15" text-anchor="middle" font-weight="bold">SUM = A + B</text></svg>`,
+    decision: `<svg viewBox="0 0 200 90"><polygon points="100,5 185,45 100,85 15,45" fill="#eab308" fill-opacity="0.2" stroke="#eab308" stroke-width="4"/><text x="100" y="50" fill="#f8fafc" font-size="14" text-anchor="middle" font-weight="bold">Villkor ?</text></svg>`,
+    io: `<svg viewBox="0 0 200 80"><polygon points="35,15 190,15 165,65 10,65" fill="#a855f7" fill-opacity="0.2" stroke="#a855f7" stroke-width="4"/><text x="100" y="47" fill="#f8fafc" font-size="14" text-anchor="middle" font-weight="bold">Ange Lösenord</text></svg>`,
+    connector: `<svg viewBox="0 0 100 80"><circle cx="50" cy="40" r="28" fill="#ec4899" fill-opacity="0.2" stroke="#ec4899" stroke-width="4"/><text x="50" y="46" fill="#f8fafc" font-size="16" text-anchor="middle" font-weight="bold">A</text></svg>`,
+    document: `<svg viewBox="0 0 200 90"><path d="M 20 15 L 180 15 L 180 65 Q 140 50 100 65 T 20 65 Z" fill="#38bdf8" fill-opacity="0.2" stroke="#38bdf8" stroke-width="4"/><text x="100" y="44" fill="#f8fafc" font-size="14" text-anchor="middle" font-weight="bold">Rapport.pdf</text></svg>`,
+    preparation: `<svg viewBox="0 0 200 80"><polygon points="40,15 160,15 185,40 160,65 40,65 15,40" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="4"/><text x="100" y="46" fill="#f8fafc" font-size="14" text-anchor="middle" font-weight="bold">Initiera variabler</text></svg>`,
+    alternate: `<svg viewBox="0 0 200 80"><rect x="15" y="15" width="170" height="50" rx="12" fill="#f97316" fill-opacity="0.2" stroke="#f97316" stroke-width="4"/><text x="100" y="47" fill="#f8fafc" font-size="13" text-anchor="middle" font-weight="bold">Alternativt Flöde</text></svg>`,
+    multiDoc: `<svg viewBox="0 0 200 90"><path d="M 30 10 L 190 10 L 190 55 Q 150 42 110 55 T 30 55 Z" fill="none" stroke="#64748b" stroke-width="2"/><path d="M 25 15 L 185 15 L 185 60 Q 145 47 105 60 T 25 60 Z" fill="none" stroke="#94a3b8" stroke-width="3"/><path d="M 20 20 L 180 20 L 180 65 Q 140 52 100 65 T 20 65 Z" fill="#38bdf8" fill-opacity="0.2" stroke="#38bdf8" stroke-width="4"/></svg>`
+};
+
 const allQuestions = [
-    // --- GIT KOMMANDON ---
+    // ==========================================
+    // DEL 1: SKRIV SJÄLV (Git Kommandon)
+    // ==========================================
     {
-        category: "Git Kommandon",
-        question: "Vad gör kommandot 'git commit -m \"meddelande\"'?",
-        options: [
-            "Gör en commit av de ändringar som har lagts till stage och sparar en snapshot i repot",
-            "Laddar upp alla lokala ändringar direkt till GitHub",
-            "Återställer källkoden till den allra första versionen",
-            "Skapar en ny branch med samma namn som meddelandet"
-        ],
-        correct: 0,
-        explanation: "'git commit -m \"meddelande\"' sparar de stageade filerna som en ögonblicksbild i repositoriet."
+        type: "typein",
+        category: "Skriv Själv",
+        question: "Vad skriver du i terminalen för att initiera ett nytt, tomt Git-repositorium i din arbetskatalog?",
+        validAnswers: ["git init"],
+        explanation: "'git init' skapar den dolda underkatalogen .git och initierar projektet som ett lokalt repo."
     },
     {
-        category: "Git Kommandon",
-        question: "Vad gör kommandot 'git status'?",
-        options: [
-            "Visar status för ändringar i ditt projekt (t.ex. stageade eller omodifierade filer)",
-            "Visar status för internetanslutningen till GitHub",
-            "Visar vilka behörigheter användare har i repot",
-            "Skriver ut datorns installerade operativsystem"
-        ],
-        correct: 0,
-        explanation: "'git status' visar vilka ändringar som har gjorts i projektet och vad som är redo att committas."
+        type: "typein",
+        category: "Skriv Själv",
+        question: "Vilket kommando visar aktuell status för ändrade, otrackade eller stageade filer i projektet?",
+        validAnswers: ["git status"],
+        explanation: "'git status' ger en översikt över arbetskatalogen och vad som lagts till i Staging Area."
     },
     {
-        category: "Git Kommandon",
-        question: "Vad gör kommandot 'git init'?",
-        options: [
-            "Initierar ett nytt Git-repositorium i en mapp (working directory)",
-            "Laddar ned ett befintligt repo från GitHub",
-            "Öppnar Git Bash på datorn",
-            "Slår samman två grenar till en"
-        ],
-        correct: 0,
-        explanation: "'git init' skapar ett nytt tomt Git-repo (.git-katalogen) i den aktuella mappen."
+        type: "typein",
+        category: "Skriv Själv",
+        question: "Hur lägger du till ALLA ändrade filer och nytillkomna filer i den aktuella mappen till staging area?",
+        validAnswers: ["git add ."],
+        explanation: "'git add .' inkluderar alla ändringar i nuvarande katalog och underkataloger i staging."
     },
     {
-        category: "Git Kommandon",
-        question: "Vad gör kommandot 'git add <filnamn>' (t.ex. 'git add uddaTal.py')?",
-        options: [
-            "Lägger till en specifik fil för att stagea den inför commit",
-            "Kör Python-filen direkt i terminalen",
-            "Skapar en ny tom fil med det namnet",
-            "Raderar filen från hårddisken"
-        ],
-        correct: 0,
-        explanation: "'git add <filnamn>' flyttar den valda filen från Working Directory till Staging Area."
+        type: "typein",
+        category: "Skriv Själv",
+        question: "Hur stagear du specifikt filen med namnet 'uddaTal.py' inför en commit?",
+        validAnswers: ["git add uddaTal.py"],
+        explanation: "'git add <filnamn>' stagear en enskild specificerad fil."
     },
     {
-        category: "Git Kommandon",
-        question: "Vad betyder och gör kommandot 'git add .'?",
-        options: [
-            "Lägger till alla filer och ändringar i den aktuella katalogen till Git-stage",
-            "Avslutar Git-programmet",
-            "Ångrar alla ändringar i projektet",
-            "Visar alla commits i terminalen"
-        ],
-        correct: 0,
-        explanation: "'git add .' stagear samtliga nya eller modifierade filer i den aktuella katalogen."
+        type: "typein",
+        category: "Skriv Själv",
+        question: "Hur gör du en commit med meddelandet 'Fixat bugg' direkt i ett enda kommando?",
+        validAnswers: ['git commit -m "Fixat bugg"', "git commit -m 'Fixat bugg'"],
+        explanation: "Flaggan -m låter dig skriva commit-meddelandet direkt: git commit -m \"Fixat bugg\"."
     },
     {
-        category: "Git Kommandon",
-        question: "Vad gör kommandot 'git log'?",
-        options: [
-            "Visar historiken över tidigare commits inklusive deras commit-ID",
-            "Loggar in på ditt GitHub-konto",
-            "Sparar en textfil med källkoden",
-            "Startar en realtidsövervakning av terminalen"
-        ],
-        correct: 0,
-        explanation: "'git log' listar historiken med commits och tillhörande commit-IDn."
+        type: "typein",
+        category: "Skriv Själv",
+        question: "Vilket kommando listar versionshistoriken och visar varje tidigare commits commit-ID (hash)?",
+        validAnswers: ["git log"],
+        explanation: "'git log' listar commits i omvänd kronologisk ordning med commit-ID och författare."
     },
     {
-        category: "Git Kommandon",
-        question: "Vad används kommandot 'git checkout <commit-ID>' till?",
-        options: [
-            "Återgå till eller inspektera en tidigare commit i projektets historik",
-            "Radera den angivna commiten permanent",
-            "Byta lösenord för ditt Git-konto",
-            "Skapa ett nytt repo med samma ID"
-        ],
-        correct: 0,
-        explanation: "'git checkout <commit-ID>' låter dig gå tillbaka och titta på en tidigare version i historiken."
+        type: "typein",
+        category: "Skriv Själv",
+        question: "Vilket kommando listar alla dina befintliga LOKALA branches i repot och markerar den aktiva med en asterisk (*)?",
+        validAnswers: ["git branch"],
+        explanation: "'git branch' utan argument listar lokala grenar."
     },
     {
-        category: "Git Kommandon",
-        question: "Vilket kommando visar alla aktiva Git-inställningar, och hur avslutar du visningen?",
-        options: [
-            "git config --list (eller git config -l), och man trycker 'q' för att avsluta",
-            "git status -l, och man trycker 'Esc'",
-            "git config show, och man skriver 'exit'",
-            "git help, och man trycker 'Ctrl+C'"
-        ],
-        correct: 0,
-        explanation: "'git config --list' eller 'git config -l' visar inställningarna; tryck 'q' för quit."
+        type: "typein",
+        category: "Skriv Själv",
+        question: "Hur skapar du och byter till en ny branch med namnet 'login-feature' i ETT enda klassiskt kommando?",
+        validAnswers: ["git checkout -b login-feature"],
+        explanation: "'git checkout -b <namn>' kombinerar grenskapande och växling. (Det moderna alternativet är 'git switch -c')."
     },
     {
-        category: "Git Kommandon",
-        question: "Vilket kommando tar bort den globala variabeln för användarnamn?",
-        options: [
-            "git config --global --unset user.name",
-            "git config --remove user.name",
-            "git delete user.name",
-            "git reset --name"
-        ],
-        correct: 0,
-        explanation: "Flaggan '--unset' raderar den angivna variabeln: 'git config --global --unset user.name'."
+        type: "typein",
+        category: "Skriv Själv",
+        question: "Vilket kommando raderar en befintlig lokal gren som heter 'old-feature'?",
+        validAnswers: ["git branch -d old-feature"],
+        explanation: "'git branch -d <namn>' raderar den angivna grenen."
     },
     {
-        category: "Git Kommandon",
-        question: "Hur ställer du in ditt namn globalt i Git via terminalen?",
-        options: [
-            'git config --global user.name "namn"',
-            'git set user.name "namn"',
-            'git config -user "namn"',
-            'git init --name "namn"'
-        ],
-        correct: 0,
-        explanation: "Rätt syntax är: git config --global user.name \"namn\"."
+        type: "typein",
+        category: "Skriv Själv",
+        question: "Vilket kommando används för att ladda upp dina lokala commits från ditt lokala repo till ett fjärr-repo (remote)?",
+        validAnswers: ["git push"],
+        explanation: "'git push' skickar dina lokala commits upp till fjärrservern (t.ex. GitHub)."
+    },
+    {
+        type: "typein",
+        category: "Skriv Själv",
+        question: "Vilket kommando hämtar hem kollegornas ändringar från ett fjärr-repo och slår ihop dem med din lokala gren?",
+        validAnswers: ["git pull"],
+        explanation: "'git pull' laddar ner och slår ihop (mergar) ändringar från fjärr-repot till ditt lokala repo."
+    },
+    {
+        type: "typein",
+        category: "Skriv Själv",
+        question: "Vilket kommando skriver du för att kontrollera vilken version av Git som är installerad på datorn?",
+        validAnswers: ["git --version"],
+        explanation: "'git --version' verifierar installationen och returnerar versionen."
     },
 
-    // --- BRANCHES ---
+    // ==========================================
+    // DEL 2: VISUELLA SYMBOL-UTMANINGAR (Flödesschema)
+    // ==========================================
     {
-        category: "Branches",
-        question: "Vad gör kommandot 'git branch' utan argument?",
+        type: "mcq",
+        category: "Symboler",
+        symbol: "io",
+        question: "Titta på symbolen ovan (Parallellogram). Vad är dess exakta funktion i ett flödesschema?",
         options: [
-            "Visar en lista över alla lokala grenar och markerar den aktiva med en asterisk (*)",
-            "Skapar en gren som heter master",
-            "Slår samman alla grenar automatiskt",
-            "Raderar osparade grenar"
+            "Indata / Utdata (t.ex. att läsa in användarvärden eller skriva ut ett resultat på skärmen)",
+            "En process eller beräkning (t.ex. att utföra en matematisk formel)",
+            "Ett villkor där koden måste välja mellan två olika vägar (Ja eller Nej)",
+            "Att markera start eller stopp på hela programkörningen"
         ],
         correct: 0,
-        explanation: "'git branch' listar lokala grenar; den du står i har en asterisk framför sig."
+        explanation: "Kugga dig inte på formen: Parallellogrammet används strikt för Input och Output (t.ex. 'Mata in ålder' eller 'Print area'). Beräkningar hör hemma i rektangeln."
     },
     {
-        category: "Branches",
-        question: "Vad gör kommandot 'git branch <namn>' (t.ex. 'git branch area-funktion')?",
+        type: "mcq",
+        category: "Symboler",
+        symbol: "process",
+        question: "Titta på symbolen ovan (Rektangel). Vilket påstående beskriver bäst vad som ska placeras här?",
         options: [
-            "Skapar en ny gren (branch) för utveckling",
-            "Byter automatiskt till den nya grenen",
-            "Raderar grenen",
-            "Laddar upp grenen till molnet"
+            "En handling eller beräkning (t.ex. 'SUM = A + B' eller 'area = bredd * längd')",
+            "Inmatning av text eller lösenord från användarens tangentbord",
+            "En Ja/Nej-fråga som delar flödet i två förgreningar",
+            "En förberedelse där variabler deklareras inför en loop"
         ],
         correct: 0,
-        explanation: "'git branch <namn>' skapar grenen men byter inte över till den."
+        explanation: "Rektangeln är en Process/Action-symbol och representerar utförande av ett steg, tilldelning eller beräkning."
     },
     {
-        category: "Branches",
-        question: "Vad gör kommandot 'git checkout <branch-name>'?",
+        type: "mcq",
+        category: "Symboler",
+        symbol: "decision",
+        question: "Titta på symbolen ovan (Romb / Diamant). Hur skiljer sig denna från övriga symboler vad gäller utgående pilar?",
         options: [
-            "Byter till en redan befintlig branch",
-            "Skapar en ny branch",
-            "Raderar grenen",
-            "Låser grenen mot redigering"
+            "Den utvärderar ett villkor och har alltid minst två utgående vägar (oftast Ja och Nej)",
+            "Den har endast en enda utgående pil som leder direkt till programmets slut",
+            "Den tar emot data från internet och sparar i ett dokument",
+            "Den utför en beräkning och returnerar automatiskt svaret till Start"
         ],
         correct: 0,
-        explanation: "'git checkout <branch-name>' växlar arbetskatalogen till en befintlig gren."
+        explanation: "Romben (Decision) är den enda grundsymbolen som delar upp processen i olika förgreningar beroende på svaret på frågan."
     },
     {
-        category: "Branches",
-        question: "Vilket kommando används för att BÅDE skapa och byta till en ny gren (klassisk variant)?",
+        type: "mcq",
+        category: "Symboler",
+        symbol: "terminator",
+        question: "Titta på symbolen ovan (Oval / Avrundad rektangel). Vad kallas den och vad gör den?",
         options: [
-            "git checkout -b <branch-name>",
-            "git branch -new <branch-name>",
-            "git switch -b <branch-name>",
-            "git init -b <branch-name>"
+            "Terminator – Representerar antingen början (Start) eller avslutningen (Slut/Stopp) i en process",
+            "Connector – Binder samman två olika flödeslinjer på samma sida",
+            "Loop-block – Upprepar koden tills ett visst tal har uppnåtts",
+            "Alternate – Visar ett alternativt bibliotek som laddas i Python"
         ],
         correct: 0,
-        explanation: "'git checkout -b <namn>' både skapar och växlar till den nya grenen."
+        explanation: "Ovalen kallas formellt 'Terminator' och markerar startpunkten och slutpunkten för schemat."
     },
     {
-        category: "Branches",
-        question: "Vilken är den moderna varianten för att både skapa och byta till en gren enligt Lektion 11?",
+        type: "mcq",
+        category: "Symboler",
+        symbol: "connector",
+        question: "Titta på den lilla cirkelformade symbolen ovan. Vad kallas den enligt symboltabellen i Lektion 13?",
         options: [
-            "git switch -c <branch-name>",
-            "git change -n <branch-name>",
-            "git checkout -c <branch-name>",
-            "git branch -c <branch-name>"
+            "Connector – Indikerar flödesanslutning till nästa del utan långa korsande linjer",
+            "Stop-punkt – Betyder att programmet pausar i 5 sekunder",
+            "Databas – Representerar en sparad SQLite-post",
+            "Subrutin – Kallar på en extern Python-modul"
         ],
         correct: 0,
-        explanation: "Enligt lektionsbilderna är 'git switch -c' den moderna motsvarigheten till 'checkout -b'."
+        explanation: "I tabellen definieras Connector som: 'Indicates the flow connection to the next symbol'."
     },
     {
-        category: "Branches",
-        question: "Vilket kommando raderar en angiven lokal gren?",
+        type: "mcq",
+        category: "Symboler",
+        symbol: "document",
+        question: "Titta på symbolen ovan (rektangel med vågig botten). Vad representerar den?",
         options: [
-            "git branch -d <branch-name>",
-            "git branch --remove <branch-name>",
-            "git delete <branch-name>",
-            "git checkout -d <branch-name>"
+            "Document – Indikerar en rapport, utskrift eller ett genererat dokument",
+            "Parallellogram – En förvrängd symbol för tangentbordsinmatning",
+            "Felhantering – Indikerar att programmet fångat ett SyntaxError",
+            "Commit – En visuell representation av en sparad Git-fil"
         ],
         correct: 0,
-        explanation: "'-d' används för att ta bort en gren: 'git branch -d <branch-name>'."
+        explanation: "I Lektion 13 beskrivs symbolen som: 'Document - Indicates a report or a document'."
+    },
+    {
+        type: "mcq",
+        category: "Symboler",
+        symbol: "multiDoc",
+        question: "Titta på symbolen ovan med flera överlappande vågiga blad. Vad indikerar den?",
+        options: [
+            "Multiple Document – Indikerar att flera dokument eller rapporter hanteras samtidigt",
+            "Version History – Representerar alla tidigare commits i Git",
+            "Array / Lista – Indikerar en datastruktur med flera värden",
+            "Multi-threading – Visar att två processorer arbetar samtidigt"
+        ],
+        correct: 0,
+        explanation: "I lektionsmaterialet specificeras: 'Multiple document - Indicates multiple documents or reports'."
+    },
+    {
+        type: "mcq",
+        category: "Symboler",
+        symbol: "preparation",
+        question: "Titta på den sexkantiga symbolen (utdragen hexagon). Vad indikerar 'Preparation'?",
+        options: [
+            "Initiering eller förberedelse inför ett kommande steg (t.ex. nollställa en räknare)",
+            "Slutgiltig kompilering av projektets källkod",
+            "Att användaren måste bekräfta med lösenord två gånger",
+            "Att internetanslutningen kontrolleras"
+        ],
+        correct: 0,
+        explanation: "'Preparation' indikerar: 'preparation taken for the following step', ofta använt för att sätta startvärden på loop-variabler."
+    },
+    {
+        type: "mcq",
+        category: "Symboler",
+        symbol: "alternate",
+        question: "Titta på symbolen ovan (rektangel med mjuka hörn). Vad betyder 'Alternate' i schemat?",
+        options: [
+            "Indikerar en alternativ process som kan köras i stället för standardprocessen",
+            "Indikerar att skriptet måste köras i Linux i stället för Windows",
+            "Indikerar en permanent loop som aldrig avslutas",
+            "Indikerar att källkoden är skriven i ett annat språk"
+        ],
+        correct: 0,
+        explanation: "I symboltabellen anges: 'Alternate - Indicates an alternate process to take place'."
     },
 
-    // --- PUSH & PULL ---
+    // ==========================================
+    // DEL 3: GIT KONCEPT, LOGIK & PUSH/PULL
+    // ==========================================
     {
-        category: "Push & Pull",
-        question: "Vad gör kommandot 'git push'?",
+        type: "mcq",
+        category: "Git & Push/Pull",
+        question: "Varför kan du arbeta och göra commits i Git även när du sitter på tåget helt utan internet?",
         options: [
-            "Laddar upp dina lokala commits till ett fjärr-repo (Remote Repository)",
-            "Hämtar andras ändringar till ditt lokala repo",
-            "Flyttar filer från arbetskatalogen till staging",
-            "Skapar ett nytt lokalt arkiv"
+            "Eftersom varje utvecklare har ett komplett lokalt repositorium med hela historiken på sin dator",
+            "Eftersom Git sparar ändringarna i webbläsarens cookies tills man kopplar upp sig",
+            "Det kan man inte; Git vägrar skapa en commit om det inte finns anslutning till GitHub",
+            "Git skickar ändringarna via Bluetooth till närmaste router i bakgrunden"
         ],
         correct: 0,
-        explanation: "'git push' laddar upp dina lokala ändringar till ett Remote Repository (t.ex. GitHub)."
+        explanation: "Git är ett distribuerat versionshanteringssystem där din lokala enhet (.git) har hela versionshistoriken lokalt."
     },
     {
-        category: "Push & Pull",
-        question: "Vad gör kommandot 'git pull'?",
+        type: "mcq",
+        category: "Git & Push/Pull",
+        question: "Vad innebär den gyllene regeln från slutet av Lektion 11: 'Alla kan pusha och pulla beroende på deras behörighet'?",
         options: [
-            "Hämtar ändringar från ett fjärr-repo och slår samman dem med ditt lokala repo",
-            "Raderar filer från fjärr-repot",
-            "Laddar upp kod utan att committa",
-            "Skapar en ny gren på GitHub"
+            "Vem som helst kan oftast pulla (läsa) ett öppet repo, men du måste ha skrivbehörighet (behörighet) för att få pusha ändringar",
+            "Att alla på GitHub har samma rättigheter så länge de har installerat Git på sin dator",
+            "Att man bara kan köra git pull om man har betalat för GitHub Pro",
+            "Att administratören måste godkänna varje enskild rad kod innan git push körs"
         ],
         correct: 0,
-        explanation: "'git pull' hämtar hem och mergar in ändringar från fjärr-repot."
+        explanation: "Behörighetsmodellen styr vem som har skrivrättigheter. Bara inbjudna medarbetare (collaborators) eller ägare har rätt att pusha kod direkt."
     },
     {
-        category: "Push & Pull",
-        question: "Vad är den viktiga principen om behörighet inför nästa lektion?",
+        type: "mcq",
+        category: "Git & Push/Pull",
+        question: "Vilken är den exakta ordningsföljden för hur ändringar rör sig när du sparar dem lokalt?",
         options: [
-            "Alla kan pusha och pulla beroende på deras behörighet i repot",
-            "Vem som helst på internet kan pusha till alla privata repon",
-            "Ingen behöver behörighet för att ändra källkod på GitHub",
-            "Endast den som har betalt konto kan pulla kod"
+            "Working Directory  ──(git add)──>  Staging Area  ──(git commit)──>  Repository",
+            "Staging Area  ──(git init)──>  Working Directory  ──(git push)──>  Repository",
+            "Working Directory  ──(git commit)──>  Staging Area  ──(git add)──>  Repository",
+            "Repository  ──(git checkout)──>  Staging Area  ──(git add)──>  Working Directory"
         ],
         correct: 0,
-        explanation: "På IMPORTANT-sliden betonas: 'Alla kan pusha och pulla beroende på deras behörighet'."
+        explanation: "Du gör ändringar i Working Directory, väljer ut dem med 'git add' till Staging Area, och sparar snapshoten i Repository med 'git commit'."
     },
     {
-        category: "Push & Pull",
-        question: "Vad är skillnaden mellan ett Local Repository och ett Remote Repository?",
+        type: "mcq",
+        category: "Git & Push/Pull",
+        question: "Vad händer om du skapar en ny fil i branchen 'feature-1', gör en commit, och sedan kör 'git checkout main'?",
         options: [
-            "Lokalt repo finns på din enhet; fjärr-repo finns på en server eller molnplattform (som GitHub eller GitLab)",
-            "Lokalt repo är alltid skrivskyddat",
-            "Fjärr-repo har ingen versionshistorik",
-            "Det är samma sak, bara olika ord för samma mapp på skrivbordet"
+            "Filen försvinner ur din arbetskatalog eftersom den endast finns i 'feature-1' fram till en merge",
+            "Filen raderas permanent från datorn",
+            "Filen kopieras automatiskt över till 'main' utan att du behöver göra något",
+            "Git varnar och vägrar byta branch så länge du har skapat nya filer"
         ],
         correct: 0,
-        explanation: "Lokalt repo är din lokala kopia på datorn; Remote Repo ligger i molnet för samarbete."
-    },
-
-    // --- UTÖKADE FLÖDESSCHEMASYMBOLER ---
-    {
-        category: "Flowchart",
-        question: "Vilken symbol kallas 'Terminal/Terminator' och vad indikerar den?",
-        options: [
-            "Oval – Indikerar start eller slut/stopp på flödesschemat eller processen",
-            "Rektangel – Indikerar en databasuppkoppling",
-            "Romb – Indikerar ett felmeddelande",
-            "Cirkel – Indikerar loopens början"
-        ],
-        correct: 0,
-        explanation: "Ovalen kallas 'Terminal/Terminator' och markerar start eller stopp."
+        explanation: "Varje gren har sitt eget tillstånd. När du byter gren uppdaterar Git din arbetskatalog så att den speglar den aktiva grenens commits."
     },
     {
-        category: "Flowchart",
-        question: "Vilken symbol kallas 'Action/Process' och vad representerar den?",
+        type: "mcq",
+        category: "Git & Push/Pull",
+        question: "Vad gör kommandot 'git checkout <commit-ID>' när du klistrar in en gammal commit-hash?",
         options: [
-            "Rektangel – Representerar en handling, beräkning eller process",
-            "Romb – Representerar ett Ja/Nej-villkor",
-            "Parallellogram – Representerar inläsning från användaren",
-            "Oval – Representerar ett avbrott i programmet"
+            "Återställer filerna i arbetskatalogen så att du kan inspektera projektet som det såg ut vid den tidpunkten",
+            "Raderar alla nyare commits som gjorts efter den valda tidpunkten",
+            "Skapar ett nytt GitHub-konto med den commiten",
+            "Tvingar fjärr-repot att rulla tillbaka sin historik"
         ],
         correct: 0,
-        explanation: "Rektangeln används för handlingar och processer (t.ex. 'SUM = SUM + X' eller beräkningar)."
+        explanation: "Med checkout till ett commit-ID kan du navigera tillbaka i historiken och se koden i det skick den befann sig i då."
     },
     {
-        category: "Flowchart",
-        question: "Vilken symbol kallas 'Decision' och vad representerar den?",
+        type: "mcq",
+        category: "Git & Push/Pull",
+        question: "I Övning 4 (betygssättning A-F med ogiltig inmatning): Varför placeras kontrollen 'Poäng < 0 eller > 100?' allra högst upp i flödesschemat?",
         options: [
-            "Romb / Diamant – Representerar olika beslut eller villkor som leder till olika vägar (t.ex. Ja/Nej)",
-            "Parallellogram – Representerar en utskrift",
-            "Oval – Representerar programmets avslut",
-            "Pil – Representerar en variabel"
+            "För att omedelbart sortera bort orimliga tal innan betygsvillkoren (≥ 90, ≥ 80 osv.) börjar utvärderas",
+            "Eftersom ett flödesschema alltid måste börja med det minsta talet",
+            "För att Python automatiskt kraschar om en variabel är större än 100",
+            "Det spelar ingen roll var den placeras så länge alla romber har Ja och Nej"
         ],
         correct: 0,
-        explanation: "Romben (Decision) används för villkor där flödet förgrenar sig utifrån utvärderingen."
+        explanation: "Flödesscheman exekveras uppifrån och ner. Genom att validera indata först förhindras felaktiga betygsutfall för t.ex. 150 eller -10 poäng."
     },
     {
-        category: "Flowchart",
-        question: "Vilken symbol används för 'Input/Output' (Indata/Utdata)?",
+        type: "mcq",
+        category: "Git & Push/Pull",
+        question: "I Övning 3 för Lösenordskontroll: Vart leder pilen vid 'No' från romben 'Finns det försök kvar?'?",
         options: [
-            "Parallellogram – Håller information som matas in eller skrivs ut (t.ex. 'Ange lösenord' eller 'Print area')",
-            "Rektangel – Håller endast siffror",
-            "Oval – Håller kommentarer",
-            "Triangel – Håller listor och matriser"
+            "Till processen 'Kontolåsning' och därefter visning av meddelandet att kontot är låst",
+            "Tillbaka till 'Ange lösenord' så att användaren får oändliga försök",
+            "Direkt till 'Du är inne på ditt konto'",
+            "Till 'Start' så att hela programmet körs om från början"
         ],
         correct: 0,
-        explanation: "Parallellogrammet representerar data som kommer in i eller skickas ut från processen."
+        explanation: "Om inga försök återstår vid felaktigt lösenord går flödet raka vägen till kontolåsning och felmeddelande innan det når Slut."
     },
     {
-        category: "Flowchart",
-        question: "Vad är funktionen för 'Connector' (cirkel/anslutningssymbol) enligt symboltabellen i Lektion 13?",
+        type: "mcq",
+        category: "Git & Push/Pull",
+        question: "Vad är skillnaden mellan kommandona 'git branch area-funktion' och 'git checkout -b area-funktion'?",
         options: [
-            "Indikerar flödesanslutningen till nästa symbol eller del av diagrammet utan att dra långa korsande linjer",
-            "Visar att programmet har kraschat",
-            "Representerar att användaren måste trycka på Enter",
-            "Startar om hela datorn"
+            "Det första skapar bara grenen; det andra både skapar grenen OCH byter till den direkt",
+            "Det första byter till grenen; det andra raderar grenen",
+            "Det första laddar upp till GitHub; det andra sparar lokalt",
+            "Det är två exakta synonymer som gör exakt samma sak"
         ],
         correct: 0,
-        explanation: "I symboltabellen förklaras 'Connector': 'Indicates the flow connection to the next symbol'."
+        explanation: "'git branch <namn>' skapar bara grenen i bakgrunden, medan flaggan '-b' i 'checkout' även byter till den omedelbart."
     },
     {
-        category: "Flowchart",
-        question: "Vad representerar symbolen 'Document' (rektangel med vågig botten)?",
+        type: "mcq",
+        category: "Git & Push/Pull",
+        question: "Varför rekommenderar lektionsmaterialet att du alltid konfigurerar samma e-post i Git som på GitHub via 'git config --global user.email'?",
         options: [
-            "Indikerar en rapport eller ett specifikt dokument i processen",
-            "Indikerar att koden kompileras i bakgrunden",
-            "Indikerar att en fil har raderats",
-            "Indikerar ett lösenordsfält"
+            "För att GitHub ska kunna koppla dina lokala commits till rätt användarprofil och visa dina bidrag",
+            "För att Git kräver en verifieringskod via mejl varje gång du gör en commit",
+            "För att GitHub annars raderar ditt repository efter 24 timmar",
+            "För att du inte kan använda terminalen utan en registrerad Gmail-adress"
         ],
         correct: 0,
-        explanation: "Enligt lektionens symboltabell: 'Document - Indicates a report or a document'."
-    },
-    {
-        category: "Flowchart",
-        question: "Vad representerar symbolen 'Multiple Document' (flera överlappande dokument med vågig kant)?",
-        options: [
-            "Indikerar flera rapporter eller dokument samtidigt",
-            "Indikerar en lista med flera variabler i Python",
-            "Indikerar att ett dokument är skrivskyddat",
-            "Indikerar historiken i Git-loggen"
-        ],
-        correct: 0,
-        explanation: "Enligt lektionens symboltabell: 'Multiple document - Indicates multiple documents or reports'."
-    },
-    {
-        category: "Flowchart",
-        question: "Vad indikerar symbolen 'Preparation' (ofta en utdragen hexagon)?",
-        options: [
-            "Indikerar förberedelser eller initialisering inför ett kommande steg (t.ex. sätta startvärden på variabler)",
-            "Indikerar att strömmen slås på",
-            "Indikerar att användaren loggas ut",
-            "Indikerar att koden sparas på GitHub"
-        ],
-        correct: 0,
-        explanation: "I symboltabellen beskrivs 'Preparation': 'Indicates preparation taken for the following step'."
-    },
-    {
-        category: "Flowchart",
-        question: "Vad indikerar symbolen 'Alternate Process' (en rektangel med rundade hörn)?",
-        options: [
-            "Indikerar en alternativ process som kan utföras istället för standardprocessen",
-            "Indikerar att ett felmeddelande ignoreras",
-            "Indikerar att programmet körs i offline-läge",
-            "Indikerar att koden är klar"
-        ],
-        correct: 0,
-        explanation: "I tabellen står: 'Alternate - Indicates an alternate process to take place'."
-    },
-    {
-        category: "Flowchart",
-        question: "Vad representerar 'Flowline' (pilarna) i ett flödesschema?",
-        options: [
-            "Binder samman formerna och visar ordning och riktning för hur processen fortskrider",
-            "Visar programmets hastighet i sekunder",
-            "Pekar alltid ut var buggar finns",
-            "Visar hur många brancher som finns i Git"
-        ],
-        correct: 0,
-        explanation: "Pilarna (Flowlines) visar ordningsföljd och riktning mellan de olika momenten."
+        explanation: "Git märker varje commit med namn och e-post. Matchar adressen ditt GitHub-konto kopplas all aktivitet sömlöst till din profil."
     }
 ];
 
@@ -462,16 +475,21 @@ let currentIndex = 0;
 let score = 0;
 let currentFilter = 'Alla';
 
-function startQuiz(category) {
-    currentFilter = category;
+function startQuiz(filter) {
+    currentFilter = filter;
     document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.textContent.startsWith(category));
+        btn.classList.toggle('active', btn.textContent.includes(filter) || (filter === 'Alla' && btn.textContent.includes('Alla')));
     });
-    if (category === 'Alla') {
+
+    if (filter === 'Alla') {
         currentQuestions = [...allQuestions];
     } else {
-        currentQuestions = allQuestions.filter(q => q.category === category);
+        currentQuestions = allQuestions.filter(q => q.category === filter);
     }
+    
+    // Slumpa ordningen på frågorna så det blir en ny utmaning varje gång
+    currentQuestions.sort(() => Math.random() - 0.5);
+
     currentIndex = 0;
     score = 0;
     document.getElementById('result-screen').style.display = 'none';
@@ -482,31 +500,52 @@ function startQuiz(category) {
 function showQuestion() {
     const q = currentQuestions[currentIndex];
     const total = currentQuestions.length;
-    document.getElementById('question-counter').textContent = `Fråga ${currentIndex + 1} av ${total}`;
+    document.getElementById('question-counter').textContent = `Utmaning ${currentIndex + 1} av ${total}`;
     document.getElementById('category-badge').textContent = q.category;
     document.getElementById('progress-fill').style.width = `${((currentIndex) / total) * 100}%`;
     document.getElementById('question-text').textContent = q.question;
 
+    const symbolDisplay = document.getElementById('symbol-display');
     const optionsList = document.getElementById('options-list');
+    const typeinBox = document.getElementById('typein-box');
+    const cmdInput = document.getElementById('cmd-input');
+
+    // Återställ vyer
+    symbolDisplay.style.display = 'none';
+    symbolDisplay.innerHTML = '';
+    optionsList.style.display = 'none';
     optionsList.innerHTML = '';
-
-    let indices = q.options.map((_, i) => i);
-    for (let i = indices.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [indices[i], indices[j]] = [indices[j], indices[i]];
-    }
-
-    indices.forEach(optIndex => {
-        const btn = document.createElement('button');
-        btn.className = 'option-btn';
-        btn.textContent = q.options[optIndex];
-        btn.onclick = () => selectOption(btn, optIndex === q.correct, q.explanation);
-        btn.dataset.correct = (optIndex === q.correct);
-        optionsList.appendChild(btn);
-    });
-
+    typeinBox.style.display = 'none';
+    cmdInput.value = '';
+    cmdInput.disabled = false;
+    document.getElementById('submit-cmd-btn').disabled = false;
     document.getElementById('feedback-box').style.display = 'none';
     document.getElementById('next-btn').style.display = 'none';
+
+    // Om frågan har en SVG-symbol
+    if (q.symbol && svgSymbols[q.symbol]) {
+        symbolDisplay.innerHTML = svgSymbols[q.symbol];
+        symbolDisplay.style.display = 'flex';
+    }
+
+    if (q.type === 'typein') {
+        typeinBox.style.display = 'flex';
+        cmdInput.focus();
+    } else {
+        optionsList.style.display = 'flex';
+        // Slumpa svarsalternativen så rätt svar inte alltid är på samma plats
+        let indices = q.options.map((_, i) => i);
+        indices.sort(() => Math.random() - 0.5);
+
+        indices.forEach(optIndex => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.textContent = q.options[optIndex];
+            btn.onclick = () => selectOption(btn, optIndex === q.correct, q.explanation);
+            btn.dataset.correct = (optIndex === q.correct);
+            optionsList.appendChild(btn);
+        });
+    }
 }
 
 function selectOption(selectedBtn, isCorrect, explanation) {
@@ -525,11 +564,11 @@ function selectOption(selectedBtn, isCorrect, explanation) {
     if (isCorrect) {
         score++;
         selectedBtn.classList.add('correct');
-        feedbackTitle.textContent = "Rätt svar! 🎉";
+        feedbackTitle.textContent = "Helt rätt! 🎯";
         feedbackTitle.style.color = "var(--correct)";
     } else {
         selectedBtn.classList.add('wrong');
-        feedbackTitle.textContent = "Fel svar";
+        feedbackTitle.textContent = "Du gick i fällan! ❌";
         feedbackTitle.style.color = "var(--wrong)";
     }
 
@@ -537,6 +576,48 @@ function selectOption(selectedBtn, isCorrect, explanation) {
     feedbackBox.style.display = 'block';
     document.getElementById('next-btn').style.display = 'inline-block';
 }
+
+function checkTypedAnswer() {
+    const q = currentQuestions[currentIndex];
+    const input = document.getElementById('cmd-input');
+    const userVal = input.value.trim();
+    
+    if (!userVal) return;
+
+    input.disabled = true;
+    document.getElementById('submit-cmd-btn').disabled = true;
+
+    // Normalisera citattecken så att både " och ' accepteras
+    const normalize = str => str.toLowerCase().replace(/['"]/g, '"').replace(/\s+/g, ' ');
+    const isCorrect = q.validAnswers.some(ans => normalize(ans) === normalize(userVal));
+
+    const feedbackBox = document.getElementById('feedback-box');
+    const feedbackTitle = document.getElementById('feedback-title');
+    const feedbackText = document.getElementById('feedback-text');
+
+    if (isCorrect) {
+        score++;
+        input.style.borderColor = "var(--correct)";
+        feedbackTitle.textContent = "Perfekt syntax! 💻";
+        feedbackTitle.style.color = "var(--correct)";
+        feedbackText.innerHTML = `<strong>Rätt:</strong> <code>${userVal}</code><br>${q.explanation}`;
+    } else {
+        input.style.borderColor = "var(--wrong)";
+        feedbackTitle.textContent = "Inte riktigt rätt kommando ❌";
+        feedbackTitle.style.color = "var(--wrong)";
+        feedbackText.innerHTML = `Du skrev: <code>${userVal}</code><br>Rätt syntax är t.ex: <code>${q.validAnswers[0]}</code><br><br>${q.explanation}`;
+    }
+
+    feedbackBox.style.display = 'block';
+    document.getElementById('next-btn').style.display = 'inline-block';
+}
+
+// Tillåt Enter-tangenten i skriv-själv fältet
+document.getElementById('cmd-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+        checkTypedAnswer();
+    }
+});
 
 function nextQuestion() {
     currentIndex++;
@@ -554,10 +635,13 @@ function showResults() {
     const total = currentQuestions.length;
     document.getElementById('final-score').textContent = `${score} / ${total}`;
     const pct = Math.round((score / total) * 100);
+    
     let msg = `Du fick ${pct}% rätt! `;
-    if (pct === 100) msg += "Full pott! Du har järnkoll på Git-kommandon och alla flödesschemasymboler.";
-    else if (pct >= 80) msg += "Grymt bra jobbat! Du behärskar både kommandona och symbolerna.";
-    else msg += "Bra kämpat! Repetera gärna symbolerna och kommandona en extra gång.";
+    if (pct === 100) msg += "Otroligt! Du behärskar både kommandosyntax och alla luriga symboler utan problem.";
+    else if (pct >= 80) msg += "Riktigt starkt resultat! Du genomskådade de flesta fällor och har bra koll på Git.";
+    else if (pct >= 60) msg += "Helt okej! Du har grunderna, men öva gärna en runda till på kommandona du fick skriva själv.";
+    else msg += "Bra träning! Kommandona och symbolerna sätter sig om du kör utmaningen en gång till.";
+    
     document.getElementById('result-message').textContent = msg;
 }
 
