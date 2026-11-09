@@ -9,8 +9,6 @@ Detta repository innehåller ett komplett, interaktivt quiz och instuderingsmate
 1. **`index.html`** – Ett snyggt, interaktivt webb-quiz med **30 frågor**, kategorifilter och direkt feedback. Kan öppnas direkt i din webbläsare eller publiceras gratis via **GitHub Pages**!
 2. **`quiz.py`** – Ett körbart terminal-quiz skrivet i Python (`python quiz.py`).
 
-## Så här laddar du upp detta projekt till ditt GitHub-konto
-Öppna terminalen (t.ex. Git Bash eller din inbyggda terminal) i mappen där dessa filer ligger och kör:
 
 ```bash
 git init
