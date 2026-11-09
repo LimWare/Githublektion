@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Git, Branches, Push/Pull & Flowchart Quiz - Programmering 1</title>
+    <title>Git Kommandon, Push/Pull & Utökade Flödesscheman</title>
     <style>
         :root {
             --bg-dark: #0f172a;
@@ -50,14 +50,14 @@
 <body>
 <div class="container">
     <header>
-        <h1>Git, Branches, Push/Pull & Flowchart Quiz</h1>
-        <p class="subtitle">Baserat på Lektion 10, 11, 13 + Nästa lektion (Push, Pull & Behörigheter)</p>
+        <h1>Git Kommandon, Push/Pull & Flödesscheman</h1>
+        <p class="subtitle">Träna på alla Git-kommandon och flödesschemasymboler från lektionsmaterialet</p>
         <div class="filter-bar">
             <button class="filter-btn active" onclick="startQuiz('Alla')">Alla (30)</button>
-            <button class="filter-btn" onclick="startQuiz('Git Grunder')">Git Grunder</button>
+            <button class="filter-btn" onclick="startQuiz('Git Kommandon')">Git Kommandon</button>
             <button class="filter-btn" onclick="startQuiz('Branches')">Branches</button>
             <button class="filter-btn" onclick="startQuiz('Push & Pull')">Push & Pull</button>
-            <button class="filter-btn" onclick="startQuiz('Flowchart')">Flowchart</button>
+            <button class="filter-btn" onclick="startQuiz('Flowchart')">Flowchart Symboler</button>
         </div>
     </header>
 
@@ -88,372 +88,372 @@
 
 <script>
 const allQuestions = [
-    // GIT GRUNDER (Lektion 10)
+    // --- GIT KOMMANDON ---
     {
-        category: "Git Grunder",
-        question: "Vad är Git enligt lektionsmaterialet?",
+        category: "Git Kommandon",
+        question: "Vad gör kommandot 'git commit -m \"meddelande\"'?",
         options: [
-            "En populär och kraftfull versionshanteringsprogramvara för att spåra ändringar i källkod",
-            "En molnplattform som ägs av Microsoft för att lagra hemsidor",
-            "En textredigerare som bara fungerar i Windows Command Prompt",
-            "Ett programmeringsspråk som ersätter Python"
+            "Gör en commit av de ändringar som har lagts till stage och sparar en snapshot i repot",
+            "Laddar upp alla lokala ändringar direkt till GitHub",
+            "Återställer källkoden till den allra första versionen",
+            "Skapar en ny branch med samma namn som meddelandet"
         ],
         correct: 0,
-        explanation: "Git är en gratis, öppen källkods-versionshanteringsprogramvara som spårar ändringar i källkoden på ett strukturerat sätt och låter dig arbeta både online och offline."
+        explanation: "'git commit -m \"meddelande\"' sparar de stageade filerna som en ögonblicksbild i repositoriet."
     },
     {
-        category: "Git Grunder",
-        question: "Vilken är en stor fördel med hur Git hanterar arbete utan internetanslutning?",
+        category: "Git Kommandon",
+        question: "Vad gör kommandot 'git status'?",
         options: [
-            "Git möjliggör arbete offline eftersom varje användare har en fullständig lokal kopia av projektet",
-            "Git sparar filerna tillfälligt i webbläsarens cache tills internet kommer tillbaka",
-            "Man kan bara läsa kod offline, inte göra nya commits",
-            "Det går inte att arbeta offline i Git utan GitHub Desktop"
+            "Visar status för ändringar i ditt projekt (t.ex. stageade eller omodifierade filer)",
+            "Visar status för internetanslutningen till GitHub",
+            "Visar vilka behörigheter användare har i repot",
+            "Skriver ut datorns installerade operativsystem"
         ],
         correct: 0,
-        explanation: "Varje användare har en komplett kopia (Local Repository) av projektet på sin dator, vilket gör att man kan jobba och committa helt offline."
+        explanation: "'git status' visar vilka ändringar som har gjorts i projektet och vad som är redo att committas."
     },
     {
-        category: "Git Grunder",
-        question: "Vad är skillnaden mellan Working Directory (arbetskatalog) och Repository (repo)?",
+        category: "Git Kommandon",
+        question: "Vad gör kommandot 'git init'?",
         options: [
-            "Working Directory är mappen där du aktivt redigerar dina projektfiler; Repository (.git-mappen) är där Git lagrar historik och metadata",
-            "Working Directory ligger på GitHub medan Repository ligger på skrivbordet",
-            "Working Directory innehåller bara raderade filer medan Repository innehåller nya filer",
-            "Det är exakt samma sak men med olika namn i Windows och Linux"
+            "Initierar ett nytt Git-repositorium i en mapp (working directory)",
+            "Laddar ned ett befintligt repo från GitHub",
+            "Öppnar Git Bash på datorn",
+            "Slår samman två grenar till en"
         ],
         correct: 0,
-        explanation: "Arbetskatalogen är din projektmapp på datorn där du gör ändringar. Repot (.git-mappen inuti projektmappen) lagrar commits, referenser och metadata."
+        explanation: "'git init' skapar ett nytt tomt Git-repo (.git-katalogen) i den aktuella mappen."
     },
     {
-        category: "Git Grunder",
-        question: "Vad är en 'Commit' i Git?",
+        category: "Git Kommandon",
+        question: "Vad gör kommandot 'git add <filnamn>' (t.ex. 'git add uddaTal.py')?",
         options: [
-            "En ögonblicksbild (snapshot) av projektets aktuella status som sparas i versionshistoriken",
-            "En uppladdning av projektet direkt till en molnserver",
-            "Ett kommando för att radera oönskade grenar",
-            "En automatisk sammanslagning av två konflikterande filer"
+            "Lägger till en specifik fil för att stagea den inför commit",
+            "Kör Python-filen direkt i terminalen",
+            "Skapar en ny tom fil med det namnet",
+            "Raderar filen från hårddisken"
         ],
         correct: 0,
-        explanation: "En commit sparar en version (snapshot) av dina stageade ändringar i Git-repositoriet tillsammans med ett beskrivande meddelande så att du kan återgå till den vid behov."
+        explanation: "'git add <filnamn>' flyttar den valda filen från Working Directory till Staging Area."
     },
     {
-        category: "Git Grunder",
-        question: "Vilket kommando skriver du i terminalen för att verifiera att Git är installerat och se vilken version du har?",
+        category: "Git Kommandon",
+        question: "Vad betyder och gör kommandot 'git add .'?",
         options: [
-            "git --version",
-            "git check-install",
-            "git status --v",
-            "git config -v"
+            "Lägger till alla filer och ändringar i den aktuella katalogen till Git-stage",
+            "Avslutar Git-programmet",
+            "Ångrar alla ändringar i projektet",
+            "Visar alla commits i terminalen"
         ],
         correct: 0,
-        explanation: "Med kommandot 'git --version' (t.ex. i Git Bash) visas den installerade versionen av Git."
+        explanation: "'git add .' stagear samtliga nya eller modifierade filer i den aktuella katalogen."
     },
     {
-        category: "Git Grunder",
-        question: "Varför rekommenderas det starkt att använda samma e-postadress i 'git config' som på ditt GitHub-konto?",
+        category: "Git Kommandon",
+        question: "Vad gör kommandot 'git log'?",
         options: [
-            "För att göra det lättare att identifiera dig och koppla din aktivitet/commits i projektet till rätt person",
-            "Annars kraschar terminalen när man kör git init",
-            "För att Git skickar en inloggningskod via mejl vid varje commit",
-            "Det krävs för att få tillgång till gratis-versionen av Git"
+            "Visar historiken över tidigare commits inklusive deras commit-ID",
+            "Loggar in på ditt GitHub-konto",
+            "Sparar en textfil med källkoden",
+            "Startar en realtidsövervakning av terminalen"
         ],
         correct: 0,
-        explanation: "När e-postadressen matchar mellan Git (user.email) och GitHub kopplas dina commits tydligt till din profil och aktivitet i projektet."
+        explanation: "'git log' listar historiken med commits och tillhörande commit-IDn."
     },
     {
-        category: "Git Grunder",
-        question: "Hur konfigurerar du ditt användarnamn globalt i Git via terminalen?",
+        category: "Git Kommandon",
+        question: "Vad används kommandot 'git checkout <commit-ID>' till?",
+        options: [
+            "Återgå till eller inspektera en tidigare commit i projektets historik",
+            "Radera den angivna commiten permanent",
+            "Byta lösenord för ditt Git-konto",
+            "Skapa ett nytt repo med samma ID"
+        ],
+        correct: 0,
+        explanation: "'git checkout <commit-ID>' låter dig gå tillbaka och titta på en tidigare version i historiken."
+    },
+    {
+        category: "Git Kommandon",
+        question: "Vilket kommando visar alla aktiva Git-inställningar, och hur avslutar du visningen?",
+        options: [
+            "git config --list (eller git config -l), och man trycker 'q' för att avsluta",
+            "git status -l, och man trycker 'Esc'",
+            "git config show, och man skriver 'exit'",
+            "git help, och man trycker 'Ctrl+C'"
+        ],
+        correct: 0,
+        explanation: "'git config --list' eller 'git config -l' visar inställningarna; tryck 'q' för quit."
+    },
+    {
+        category: "Git Kommandon",
+        question: "Vilket kommando tar bort den globala variabeln för användarnamn?",
+        options: [
+            "git config --global --unset user.name",
+            "git config --remove user.name",
+            "git delete user.name",
+            "git reset --name"
+        ],
+        correct: 0,
+        explanation: "Flaggan '--unset' raderar den angivna variabeln: 'git config --global --unset user.name'."
+    },
+    {
+        category: "Git Kommandon",
+        question: "Hur ställer du in ditt namn globalt i Git via terminalen?",
         options: [
             'git config --global user.name "namn"',
             'git set user.name "namn"',
-            'git init --user "namn"',
-            'git config --unset user.name'
+            'git config -user "namn"',
+            'git init --name "namn"'
         ],
         correct: 0,
-        explanation: 'Du ställer in namn och e-post med \'git config --global user.name "namn"\' respektive \'git config --global user.email "email@example.com"\'.'
-    },
-    {
-        category: "Git Grunder",
-        question: "Vilket kommando visar alla aktiva konfigurationsinställningar i ditt Git-system (och hur avslutar man visningen)?",
-        options: [
-            "git config --list (eller git config -l), och man trycker 'q' för att avsluta",
-            "git show config, och man trycker 'Esc' för att avsluta",
-            "git status --config, och man trycker 'Ctrl+C'",
-            "git help list, och man skriver 'exit'"
-        ],
-        correct: 0,
-        explanation: "'git config --list' eller 'git config -l' visar alla inställningar, och man trycker på 'q' (quit) för att avsluta listvyn."
-    },
-    {
-        category: "Git Grunder",
-        question: "Vad gör kommandot 'git config --global --unset user.name'?",
-        options: [
-            "Det tar bort den globala konfigurationsvariabeln 'user.name'",
-            "Det återställer hela datorns Git-historik",
-            "Det byter namn på den aktiva branchen till user.name",
-            "Det öppnar konfigurationsfilen i standardtextredigeraren"
-        ],
-        correct: 0,
-        explanation: "Flaggan '--unset' tar bort den angivna konfigurationsvariabeln, medan '--edit' öppnar konfigurationsfilen i din textredigerare."
-    },
-    {
-        category: "Git Grunder",
-        question: "I vilken ordning går filerna genom Gits tre huvudsteg när du sparar arbete lokalt?",
-        options: [
-            "Working Directory → (git add) → Staging Area → (git commit) → Repository",
-            "Repository → (git init) → Working Directory → (git push) → Staging Area",
-            "Staging Area → (git commit) → Working Directory → (git add) → Repository",
-            "Working Directory → (git commit) → Staging Area → (git add) → Repository"
-        ],
-        correct: 0,
-        explanation: "Du redigerar i Working Directory, lägger till i Staging Area med 'git add', och sparar i Repository med 'git commit'."
-    },
-    {
-        category: "Git Grunder",
-        question: "I Övning 1 skapar du mappen 'proj1' och filen 'lista.py'. Vilka kommandon kör du för att initiera repot, stagea alla filer i katalogen och göra en commit?",
-        options: [
-            'git init  →  git add .  →  git commit -m "meddelande"',
-            'git start  →  git stage all  →  git save -m "meddelande"',
-            'git init  →  git commit .  →  git push "meddelande"',
-            'git new proj1  →  git add lista.py  →  git log -m "meddelande"'
-        ],
-        correct: 0,
-        explanation: "'git init' skapar repot, 'git add .' (eller 'git add lista.py') stagear ändringarna och 'git commit -m \"...\"' sparar dem i repot."
-    },
-    {
-        category: "Git Grunder",
-        question: "Hur ser du historiken över alla tidigare commits (och deras commit-ID), och hur återgår du till en specifik tidigare commit?",
-        options: [
-            "Visar historik med 'git log' och återgår med 'git checkout <commit-ID>'",
-            "Visar historik med 'git status' och återgår med 'git reset --hard'",
-            "Visar historik med 'git history' och återgår med 'git return <ID>'",
-            "Visar historik med 'git branch' och återgår med 'git switch <ID>'"
-        ],
-        correct: 0,
-        explanation: "Enligt lektionsmaterialet används 'git log' för att se commit-IDn och 'git checkout <commit-ID>' för att gå tillbaka till en tidigare version."
+        explanation: "Rätt syntax är: git config --global user.name \"namn\"."
     },
 
-    // BRANCHES (Lektion 11)
+    // --- BRANCHES ---
     {
         category: "Branches",
-        question: "Vad är en Branch (gren) i Git och varför används den?",
+        question: "Vad gör kommandot 'git branch' utan argument?",
         options: [
-            "En kopia/egen väg av projektet från en specifik commit för att utveckla nya funktioner eller lösa problem utan att störa huvudkoden",
-            "En säkerhetskopia som bara sparas på en extern hårddisk",
-            "Ett felmeddelande som uppstår när två personer redigerar samma rad",
-            "En mapp där man lägger filer som Git ska ignorera"
+            "Visar en lista över alla lokala grenar och markerar den aktiva med en asterisk (*)",
+            "Skapar en gren som heter master",
+            "Slår samman alla grenar automatiskt",
+            "Raderar osparade grenar"
         ],
         correct: 0,
-        explanation: "Med en branch kopierar du projektet till en egen väg, jobbar fritt där (t.ex. en ny feature eller buggfix) och kan sedan slå ihop ändringarna med huvudvägen (main/master)."
+        explanation: "'git branch' listar lokala grenar; den du står i har en asterisk framför sig."
     },
     {
         category: "Branches",
-        question: "Om du kör kommandot 'git branch' och får utskriften:\n* main\n  feature-branch\n  bug-fix-branch\nVad betyder asterisken (*) framför 'main'?",
+        question: "Vad gör kommandot 'git branch <namn>' (t.ex. 'git branch area-funktion')?",
         options: [
-            "Att 'main' är den aktiva grenen som du befinner dig i just nu",
-            "Att 'main' innehåller osparade ändringar",
-            "Att 'main' är raderad från fjärr-repot",
-            "Att 'main' är låst och inte går att redigera"
+            "Skapar en ny gren (branch) för utveckling",
+            "Byter automatiskt till den nya grenen",
+            "Raderar grenen",
+            "Laddar upp grenen till molnet"
         ],
         correct: 0,
-        explanation: "Kommandot 'git branch' listar alla lokala grenar och markerar den aktiva grenen du befinner dig i med en asterisk (*)."
+        explanation: "'git branch <namn>' skapar grenen men byter inte över till den."
     },
     {
         category: "Branches",
-        question: "Vilket kommando raderar en befintlig lokal gren med namnet 'test-branch'?",
+        question: "Vad gör kommandot 'git checkout <branch-name>'?",
         options: [
-            "git branch -d test-branch",
-            "git branch --remove test-branch",
-            "git delete branch test-branch",
-            "git checkout -d test-branch"
+            "Byter till en redan befintlig branch",
+            "Skapar en ny branch",
+            "Raderar grenen",
+            "Låser grenen mot redigering"
         ],
         correct: 0,
-        explanation: "Enligt Lektion 11 används 'git branch -d <branch-name>' för att radera den angivna grenen."
+        explanation: "'git checkout <branch-name>' växlar arbetskatalogen till en befintlig gren."
     },
     {
         category: "Branches",
-        question: "I Övning 2 (proj2) ska du skapa en ny branch som heter 'area-funktion' och byta till den direkt. Vilka två kommandon gör exakt detta (klassisk respektive modern variant)?",
+        question: "Vilket kommando används för att BÅDE skapa och byta till en ny gren (klassisk variant)?",
         options: [
-            "Klassisk: 'git checkout -b area-funktion' | Modern: 'git switch -c area-funktion'",
-            "Klassisk: 'git branch -b area-funktion' | Modern: 'git move -c area-funktion'",
-            "Klassisk: 'git checkout area-funktion' | Modern: 'git init -b area-funktion'",
-            "Klassisk: 'git merge -b area-funktion' | Modern: 'git pull -c area-funktion'"
+            "git checkout -b <branch-name>",
+            "git branch -new <branch-name>",
+            "git switch -b <branch-name>",
+            "git init -b <branch-name>"
         ],
         correct: 0,
-        explanation: "'git checkout -b <namn>' är det klassiska sättet att både skapa och byta till en ny gren, och 'git switch -c <namn>' är den moderna varianten."
+        explanation: "'git checkout -b <namn>' både skapar och växlar till den nya grenen."
     },
     {
         category: "Branches",
-        question: "I Övning 2 skapar du en ny Python-fil (för cirkelns area) och committar den inne i branchen 'area-funktion'. Vad händer med filen i din arbetskatalog om du sedan växlar tillbaka till 'main' med 'git checkout main'?",
+        question: "Vilken är den moderna varianten för att både skapa och byta till en gren enligt Lektion 11?",
         options: [
-            "Den nya Python-filen syns inte i 'main' eftersom den bara är committad i 'area-funktion' än så länge",
-            "Filen raderas permanent från båda brancherna",
-            "Filen kopieras automatiskt över till 'main' utan merge",
-            "Git blockerar dig från att byta branch när du har gjort en commit"
+            "git switch -c <branch-name>",
+            "git change -n <branch-name>",
+            "git checkout -c <branch-name>",
+            "git branch -c <branch-name>"
         ],
         correct: 0,
-        explanation: "Varje branch har sin egen historik. Filer som committats i 'area-funktion' finns bara i den grenen tills du väljer att slå ihop (mergea) grenarna."
+        explanation: "Enligt lektionsbilderna är 'git switch -c' den moderna motsvarigheten till 'checkout -b'."
+    },
+    {
+        category: "Branches",
+        question: "Vilket kommando raderar en angiven lokal gren?",
+        options: [
+            "git branch -d <branch-name>",
+            "git branch --remove <branch-name>",
+            "git delete <branch-name>",
+            "git checkout -d <branch-name>"
+        ],
+        correct: 0,
+        explanation: "'-d' används för att ta bort en gren: 'git branch -d <branch-name>'."
     },
 
-    // PUSH & PULL + NÄSTA LEKTION (Lektion 11 & Fjärr-repo)
-    {
-        category: "Push & Pull",
-        question: "Vad är skillnaden mellan ett Local Repository (lokalt repo) och ett Remote Repository (fjärr-repo)?",
-        options: [
-            "Lokalt repo ligger på din egen dator; Fjärr-repo ligger på en annan dator/server eller molnplattform som GitHub eller GitLab",
-            "Lokalt repo har inga branches; Fjärr-repo har bara branches",
-            "Lokalt repo kräver internet; Fjärr-repo fungerar bara offline",
-            "Lokalt repo sparar bara Python-filer; Fjärr-repo sparar bara HTML-filer"
-        ],
-        correct: 0,
-        explanation: "Ett Local Repository finns på din lokala enhet, medan ett Remote Repository ligger på en server/molnplattform (t.ex. GitHub/GitLab) för samarbete."
-    },
+    // --- PUSH & PULL ---
     {
         category: "Push & Pull",
         question: "Vad gör kommandot 'git push'?",
         options: [
-            "Laddar upp dina lokala commits/ändringar från ditt lokala repo till ett fjärr-repo (Remote Repository)",
-            "Hämtar hem andras ändringar från GitHub till din dator",
-            "Flyttar filer från Working Directory till Staging Area",
-            "Skapar en ny branch lokalt på hårddisken"
+            "Laddar upp dina lokala commits till ett fjärr-repo (Remote Repository)",
+            "Hämtar andras ändringar till ditt lokala repo",
+            "Flyttar filer från arbetskatalogen till staging",
+            "Skapar ett nytt lokalt arkiv"
         ],
         correct: 0,
-        explanation: "Som pilen i diagrammet visar: 'git push' skickar (laddar upp) ändringar från Local Repo till Remote Repository."
+        explanation: "'git push' laddar upp dina lokala ändringar till ett Remote Repository (t.ex. GitHub)."
     },
     {
         category: "Push & Pull",
         question: "Vad gör kommandot 'git pull'?",
         options: [
-            "Hämtar ändringar från ett fjärr-repo (Remote Repository) och slår samman dem med ditt lokala repo",
-            "Raderar fjärr-repot på GitHub",
-            "Laddar upp lokala filer till molnet",
-            "Ångrar senaste lokala commiten utan att kontakta servern"
+            "Hämtar ändringar från ett fjärr-repo och slår samman dem med ditt lokala repo",
+            "Raderar filer från fjärr-repot",
+            "Laddar upp kod utan att committa",
+            "Skapar en ny gren på GitHub"
         ],
         correct: 0,
-        explanation: "'git pull' hämtar de senaste ändringarna från fjärr-repot och integrerar (slår samman) dem i ditt lokala repo."
+        explanation: "'git pull' hämtar hem och mergar in ändringar från fjärr-repot."
     },
     {
         category: "Push & Pull",
-        question: "Vad står det på den viktiga OBS!/IMPORTANT-sidan i slutet av Lektion 11 angående 'push' och 'pull' inför nästa lektion?",
+        question: "Vad är den viktiga principen om behörighet inför nästa lektion?",
         options: [
-            "Alla kan pusha och pulla beroende på deras behörighet (och man ska skapa ett repo per projekt samt en ny gren per funktion)",
-            "Vem som helst på internet kan alltid pusha direkt till alla privata och publika repon utan behörighet",
-            "Bara den som skapat repot kan pulla kod, men alla kan pusha",
-            "Man får aldrig använda push och pull i samma projekt som branches"
+            "Alla kan pusha och pulla beroende på deras behörighet i repot",
+            "Vem som helst på internet kan pusha till alla privata repon",
+            "Ingen behöver behörighet för att ändra källkod på GitHub",
+            "Endast den som har betalt konto kan pulla kod"
         ],
         correct: 0,
-        explanation: "På sista sliden i Lektion 11 betonas tre saker: 1) Skapa ett repo för varje projekt, 2) Skapa en ny gren för varje funktion/förbättring, 3) Alla kan pusha och pulla beroende på deras behörighet."
+        explanation: "På IMPORTANT-sliden betonas: 'Alla kan pusha och pulla beroende på deras behörighet'."
     },
     {
         category: "Push & Pull",
-        question: "Vad innebär det i praktiken på t.ex. GitHub att 'alla kan pusha och pulla beroende på deras behörighet'?",
+        question: "Vad är skillnaden mellan ett Local Repository och ett Remote Repository?",
         options: [
-            "För ett publikt repo kan alla oftast läsa/pulla, men för att få pusha (ändra koden i repot) krävs skrivbehörighet (t.ex. som ägare eller inbjuden Collaborator)",
-            "Att man måste betala en avgift för varje git pull man gör",
-            "Att Git bara tillåter en person i världen att ha repot nedladdat åt gången",
-            "Att behörigheten styrs av vilket operativsystem (Windows eller Mac) man använder"
+            "Lokalt repo finns på din enhet; fjärr-repo finns på en server eller molnplattform (som GitHub eller GitLab)",
+            "Lokalt repo är alltid skrivskyddat",
+            "Fjärr-repo har ingen versionshistorik",
+            "Det är samma sak, bara olika ord för samma mapp på skrivbordet"
         ],
         correct: 0,
-        explanation: "Behörigheter (permissions) avgör vem som får läsa (pull/clone) respektive skriva (push) till ett fjärr-repo. I teamprojekt lägger man till medarbetare (collaborators) eller använder Pull Requests."
-    },
-    {
-        category: "Push & Pull",
-        question: "Varför är det en bra vana att köra 'git pull' innan du börjar koda eller innan du kör 'git push' i ett gemensamt projekt?",
-        options: [
-            "För att få hem kollegornas senaste ändringar till ditt lokala repo så att du jobbar mot en uppdaterad kodbas och undviker onödiga konflikter",
-            "För att tömma Staging Area på gamla filer",
-            "För att komprimera Python-filerna så att de tar mindre plats",
-            "Det behövs aldrig om man använder Git Bash"
-        ],
-        correct: 0,
-        explanation: "Genom att köra 'git pull' synkar du ditt lokala repo med fjärr-repot så att du har alla andras senaste commits innan du bygger vidare eller pushar."
+        explanation: "Lokalt repo är din lokala kopia på datorn; Remote Repo ligger i molnet för samarbete."
     },
 
-    // FLOWCHART (Lektion 13)
+    // --- UTÖKADE FLÖDESSCHEMASYMBOLER ---
     {
         category: "Flowchart",
-        question: "Vad är ett flowchart (flödesschema) och vilka tre huvudområden nämns för varför man använder dem?",
+        question: "Vilken symbol kallas 'Terminal/Terminator' och vad indikerar den?",
         options: [
-            "Ett visuellt diagram som visar steg, beslut och ordningsföljd i en process – används för Tydlighet, Felsökning och Utbildning",
-            "En databas för att lagra användarlösenord – används för Kryptering, Backup och Nätverk",
-            "Ett kommando i Git för att rita grafer över commits – används för Push, Pull och Merge",
-            "En mall för att skriva CSS-kod – används för Färgsättning, Typsnitt och Animation"
+            "Oval – Indikerar start eller slut/stopp på flödesschemat eller processen",
+            "Rektangel – Indikerar en databasuppkoppling",
+            "Romb – Indikerar ett felmeddelande",
+            "Cirkel – Indikerar loopens början"
         ],
         correct: 0,
-        explanation: "Flödesscheman ritar upp hur en process eller ett program fungerar steg för steg för att planera, dokumentera och förbättra processer (Tydlighet, Felsökning, Utbildning)."
+        explanation: "Ovalen kallas 'Terminal/Terminator' och markerar start eller stopp."
     },
     {
         category: "Flowchart",
-        question: "Vilken symbol (form) i ett flödesschema kallas 'Terminator' och vad representerar den?",
+        question: "Vilken symbol kallas 'Action/Process' och vad representerar den?",
         options: [
-            "Oval – representerar Start eller Slut/Stopp i en process",
-            "Rektangel – representerar en beräkning",
-            "Romb/Diamant – representerar ett beslut",
-            "Parallellogram – representerar utskrift på skärmen"
+            "Rektangel – Representerar en handling, beräkning eller process",
+            "Romb – Representerar ett Ja/Nej-villkor",
+            "Parallellogram – Representerar inläsning från användaren",
+            "Oval – Representerar ett avbrott i programmet"
         ],
         correct: 0,
-        explanation: "En Oval (Terminator) markerar alltid var flödesschemat startar (Start) och var det slutar (Slut/End/Stop)."
+        explanation: "Rektangeln används för handlingar och processer (t.ex. 'SUM = SUM + X' eller beräkningar)."
     },
     {
         category: "Flowchart",
-        question: "Vilka former används för 1) Process/Beräkning, 2) Beslut/Villkor (Ja/Nej) samt 3) Indata/Utdata (Input/Output)?",
+        question: "Vilken symbol kallas 'Decision' och vad representerar den?",
         options: [
-            "1) Rektangel = Process, 2) Romb/Diamant = Beslut, 3) Parallellogram = Indata/Utdata",
-            "1) Cirkel = Process, 2) Rektangel = Beslut, 3) Triangel = Indata/Utdata",
-            "1) Parallellogram = Process, 2) Oval = Beslut, 3) Romb = Indata/Utdata",
-            "1) Romb = Process, 2) Parallellogram = Beslut, 3) Rektangel = Indata/Utdata"
+            "Romb / Diamant – Representerar olika beslut eller villkor som leder till olika vägar (t.ex. Ja/Nej)",
+            "Parallellogram – Representerar en utskrift",
+            "Oval – Representerar programmets avslut",
+            "Pil – Representerar en variabel"
         ],
         correct: 0,
-        explanation: "Rektangel är en handling/beräkning (t.ex. area = length * breadth), Romb/Diamant är ett villkor med Ja/Nej-vägar, och Parallellogram är inmatning/utskrift (t.ex. Ange lösenord / Print area)."
+        explanation: "Romben (Decision) används för villkor där flödet förgrenar sig utifrån utvärderingen."
     },
     {
         category: "Flowchart",
-        question: "Vilka gratis eller populära verktyg tas upp i Lektion 13 för att rita flödesscheman?",
+        question: "Vilken symbol används för 'Input/Output' (Indata/Utdata)?",
         options: [
-            "Canva, Miro, draw.io (diagrams.net), Figma samt Microsoft Office / Google Drive",
-            "Endast Adobe Photoshop och AutoCAD",
-            "Git Bash och Windows Anteckningar",
-            "VLC Media Player och FileZilla"
+            "Parallellogram – Håller information som matas in eller skrivs ut (t.ex. 'Ange lösenord' eller 'Print area')",
+            "Rektangel – Håller endast siffror",
+            "Oval – Håller kommentarer",
+            "Triangel – Håller listor och matriser"
         ],
         correct: 0,
-        explanation: "Lektionen nämner Canva (enkelt med mallar), Miro (perfekt för grupparbete), draw.io/diagrams.net (gratis, vanligt bland utvecklare), Figma samt Office/Google Drive."
+        explanation: "Parallellogrammet representerar data som kommer in i eller skickas ut från processen."
     },
     {
         category: "Flowchart",
-        question: "I Övning 2 (Temperaturkontroll) kontrolleras villkoret 'Om temperatur > 0'. Vad ska ske på Ja-vägen respektive Nej-vägen enligt övningen?",
+        question: "Vad är funktionen för 'Connector' (cirkel/anslutningssymbol) enligt symboltabellen i Lektion 13?",
         options: [
-            "Ja → Skriv ut 'Över fryspunkt' | Nej → Skriv ut 'Fryspunkt'",
-            "Ja → Skriv ut 'Fryspunkt' | Nej → Skriv ut 'Över fryspunkt'",
-            "Ja → Starta om programmet | Nej → Lås kontot",
-            "Ja → Beräkna medelvärde | Nej → Avsluta utan utskrift"
+            "Indikerar flödesanslutningen till nästa symbol eller del av diagrammet utan att dra långa korsande linjer",
+            "Visar att programmet har kraschat",
+            "Representerar att användaren måste trycka på Enter",
+            "Startar om hela datorn"
         ],
         correct: 0,
-        explanation: "Om temperaturen är större än 0 (Ja) skrivs 'Över fryspunkt' ut, annars (Nej) skrivs 'Fryspunkt' ut, följt av Slut."
+        explanation: "I symboltabellen förklaras 'Connector': 'Indicates the flow connection to the next symbol'."
     },
     {
         category: "Flowchart",
-        question: "Titta på det utbyggda flödesschemat för Lösenordskontroll (Övning 3). Vad händer om lösenordet är FEL ('No' vid 'Är det Rätt?')?",
+        question: "Vad representerar symbolen 'Document' (rektangel med vågig botten)?",
         options: [
-            "Det visas ett felmeddelande ('Inloggning misslyckades') och därefter kontrolleras 'Finns det försök kvar?' i en ny romb",
-            "Programmet går direkt till 'Slut' utan att visa något meddelande",
-            "Användaren loggas in på ett gästkonto automatiskt",
-            "Kontot låses direkt vid allra första felaktiga försöket"
+            "Indikerar en rapport eller ett specifikt dokument i processen",
+            "Indikerar att koden kompileras i bakgrunden",
+            "Indikerar att en fil har raderats",
+            "Indikerar ett lösenordsfält"
         ],
         correct: 0,
-        explanation: "Vid fel lösenord visas först 'Inloggning misslyckades', sedan kollar en beslutssymbol om det finns försök kvar: vid 'Yes' går pilen tillbaka till 'Ange lösenord', vid 'No' sker kontolåsning."
+        explanation: "Enligt lektionens symboltabell: 'Document - Indicates a report or a document'."
     },
     {
         category: "Flowchart",
-        question: "I Övning 4 (Betygssättning A–F samt validering av ogiltig inmatning), vilken kontroll måste ligga ALLRA FÖRST efter 'Mata in poäng' och i vilken ordning testas betygen?",
+        question: "Vad representerar symbolen 'Multiple Document' (flera överlappande dokument med vågig kant)?",
         options: [
-            "Först kontrolleras om poängen är ogiltig ('Poäng < 0 eller > 100?'), och därefter testas betygen uppifrån och ner med start på högsta betyg (≥ 90 för A, ≥ 80 för B osv.)",
-            "Först testas lägsta betyg (≥ 50 för E) och allra sist kontrolleras om poängen är över 100",
-            "Ordningen spelar ingen roll i ett flödesschema så länge alla romber finns med",
-            "Man kontrollerar bara betyg C och låter användaren gissa resten"
+            "Indikerar flera rapporter eller dokument samtidigt",
+            "Indikerar en lista med flera variabler i Python",
+            "Indikerar att ett dokument är skrivskyddat",
+            "Indikerar historiken i Git-loggen"
         ],
         correct: 0,
-        explanation: "Flödesschemat går uppifrån och ner. Först fångar man upp ogiltig inmatning (< 0 eller > 100), och sedan kollar man från högsta gränserna (≥ 90 → A, Nej → ≥ 80 → B osv.)."
+        explanation: "Enligt lektionens symboltabell: 'Multiple document - Indicates multiple documents or reports'."
+    },
+    {
+        category: "Flowchart",
+        question: "Vad indikerar symbolen 'Preparation' (ofta en utdragen hexagon)?",
+        options: [
+            "Indikerar förberedelser eller initialisering inför ett kommande steg (t.ex. sätta startvärden på variabler)",
+            "Indikerar att strömmen slås på",
+            "Indikerar att användaren loggas ut",
+            "Indikerar att koden sparas på GitHub"
+        ],
+        correct: 0,
+        explanation: "I symboltabellen beskrivs 'Preparation': 'Indicates preparation taken for the following step'."
+    },
+    {
+        category: "Flowchart",
+        question: "Vad indikerar symbolen 'Alternate Process' (en rektangel med rundade hörn)?",
+        options: [
+            "Indikerar en alternativ process som kan utföras istället för standardprocessen",
+            "Indikerar att ett felmeddelande ignoreras",
+            "Indikerar att programmet körs i offline-läge",
+            "Indikerar att koden är klar"
+        ],
+        correct: 0,
+        explanation: "I tabellen står: 'Alternate - Indicates an alternate process to take place'."
+    },
+    {
+        category: "Flowchart",
+        question: "Vad representerar 'Flowline' (pilarna) i ett flödesschema?",
+        options: [
+            "Binder samman formerna och visar ordning och riktning för hur processen fortskrider",
+            "Visar programmets hastighet i sekunder",
+            "Pekar alltid ut var buggar finns",
+            "Visar hur många brancher som finns i Git"
+        ],
+        correct: 0,
+        explanation: "Pilarna (Flowlines) visar ordningsföljd och riktning mellan de olika momenten."
     }
 ];
 
@@ -555,9 +555,9 @@ function showResults() {
     document.getElementById('final-score').textContent = `${score} / ${total}`;
     const pct = Math.round((score / total) * 100);
     let msg = `Du fick ${pct}% rätt! `;
-    if (pct === 100) msg += "Spikat! Du har stenkoll på både Git, branches, push/pull och flowcharts.";
-    else if (pct >= 80) msg += "Riktigt bra jobbat! Du är väl förberedd inför lektionen och övningarna.";
-    else msg += "Bra kämpat! Kör gärna igenom en vända till för att sätta alla begrepp.";
+    if (pct === 100) msg += "Full pott! Du har järnkoll på Git-kommandon och alla flödesschemasymboler.";
+    else if (pct >= 80) msg += "Grymt bra jobbat! Du behärskar både kommandona och symbolerna.";
+    else msg += "Bra kämpat! Repetera gärna symbolerna och kommandona en extra gång.";
     document.getElementById('result-message').textContent = msg;
 }
 
