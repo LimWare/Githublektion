@@ -165,13 +165,13 @@ const allQuestions = [
         category: "Git Grunder",
         question: "Hur konfigurerar du ditt användarnamn globalt i Git via terminalen?",
         options: [
-            "git config --global user.name "namn"",
-            "git set user.name "namn"",
-            "git init --user "namn"",
-            "git config --unset user.name"
+            'git config --global user.name "namn"',
+            'git set user.name "namn"',
+            'git init --user "namn"',
+            'git config --unset user.name'
         ],
         correct: 0,
-        explanation: "Du ställer in namn och e-post med 'git config --global user.name "namn"' respektive 'git config --global user.email "email@example.com"'."
+        explanation: 'Du ställer in namn och e-post med \'git config --global user.name "namn"\' respektive \'git config --global user.email "email@example.com"\'.'
     },
     {
         category: "Git Grunder",
@@ -213,13 +213,13 @@ const allQuestions = [
         category: "Git Grunder",
         question: "I Övning 1 skapar du mappen 'proj1' och filen 'lista.py'. Vilka kommandon kör du för att initiera repot, stagea alla filer i katalogen och göra en commit?",
         options: [
-            "git init  →  git add .  →  git commit -m "meddelande"",
-            "git start  →  git stage all  →  git save -m "meddelande"",
-            "git init  →  git commit .  →  git push "meddelande"",
-            "git new proj1  →  git add lista.py  →  git log -m "meddelande""
+            'git init  →  git add .  →  git commit -m "meddelande"',
+            'git start  →  git stage all  →  git save -m "meddelande"',
+            'git init  →  git commit .  →  git push "meddelande"',
+            'git new proj1  →  git add lista.py  →  git log -m "meddelande"'
         ],
         correct: 0,
-        explanation: "'git init' skapar repot, 'git add .' (eller 'git add lista.py') stagear ändringarna och 'git commit -m "..."' sparar dem i repot."
+        explanation: "'git init' skapar repot, 'git add .' (eller 'git add lista.py') stagear ändringarna och 'git commit -m \"...\"' sparar dem i repot."
     },
     {
         category: "Git Grunder",
@@ -249,11 +249,7 @@ const allQuestions = [
     },
     {
         category: "Branches",
-        question: "Om du kör kommandot 'git branch' och får utskriften:
-* main
-  feature-branch
-  bug-fix-branch
-Vad betyder asterisken (*) framför 'main'?",
+        question: "Om du kör kommandot 'git branch' och får utskriften:\n* main\n  feature-branch\n  bug-fix-branch\nVad betyder asterisken (*) framför 'main'?",
         options: [
             "Att 'main' är den aktiva grenen som du befinner dig i just nu",
             "Att 'main' innehåller osparade ändringar",
@@ -457,7 +453,7 @@ Vad betyder asterisken (*) framför 'main'?",
             "Man kontrollerar bara betyg C och låter användaren gissa resten"
         ],
         correct: 0,
-        explanation: "Flödesschemat går uppifrån och ner. Först fångar man upp ogiltig inmatning (< 0 eller > 100), och sedan kollar man från högsta gränsen (≥ 90 → A, Nej → ≥ 80 → B osv.) så att t.ex. 85 poäng ger B."
+        explanation: "Flödesschemat går uppifrån och ner. Först fångar man upp ogiltig inmatning (< 0 eller > 100), och sedan kollar man från högsta gränserna (≥ 90 → A, Nej → ≥ 80 → B osv.)."
     }
 ];
 
@@ -494,7 +490,6 @@ function showQuestion() {
     const optionsList = document.getElementById('options-list');
     optionsList.innerHTML = '';
 
-    // Create shuffled index mapping so correct answer isn't always first
     let indices = q.options.map((_, i) => i);
     for (let i = indices.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
